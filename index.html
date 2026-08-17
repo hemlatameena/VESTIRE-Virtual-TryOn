@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VESTIRE — Minimalist Fashion</title>
+<style>
+:root{--bg:#faf9f7;--ink:#111;--muted:#777;--line:#e7e4df;--accent:#b79a7a}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif}button{font:inherit;cursor:pointer}a{color:inherit;text-decoration:none}
+.header{height:76px;border-bottom:1px solid var(--line);display:flex;align-items:center;padding:0 5%;background:#faf9f7ee;backdrop-filter:blur(12px);position:sticky;top:0;z-index:20}.logo{font:30px Georgia,serif;letter-spacing:.08em}.nav{display:flex;gap:32px;margin:auto;font-size:11px;letter-spacing:.1em;text-transform:uppercase}.bag,.nav-link,.footer-link{font:inherit}.bag{font-size:11px;letter-spacing:.08em;border:0;background:none}.nav-link{border:0;background:none;font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:0}.footer-link{border:0;background:none;color:#777;font-size:10px;padding:0}.step{border:0;background:none;text-align:left;padding:0;cursor:pointer}.step:hover h3,.nav-link:hover,.bag:hover,.footer-link:hover{text-decoration:underline}.bag-content{font-size:13px}.bag-item{display:flex;gap:16px;align-items:center;border-bottom:1px solid var(--line);padding:14px 0}.bag-item img{width:80px;height:100px;object-fit:cover}.bag-empty{padding:35px 0;color:#777}
+.hero{min-height:690px;display:grid;grid-template-columns:1fr 1.05fr;align-items:center;gap:6%;padding:70px 7%}.kicker,.small{font-size:10px;letter-spacing:.22em;text-transform:uppercase}.hero h1{font:400 clamp(60px,8vw,112px)/.88 Georgia,serif;margin:22px 0 30px}.hero h1 em{color:var(--accent);font-style:normal}.hero p{font-size:16px;line-height:1.8;color:#555;max-width:450px}.hero-actions{display:flex;gap:10px;margin-top:28px}.primary,.secondary,.try{padding:15px 25px;text-transform:uppercase;letter-spacing:.12em;font-size:10px}.primary{border:0;background:#111;color:#fff}.secondary,.try{border:1px solid #111;background:transparent}.hero-image{height:600px;background:url("https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=1200&q=85") center/cover}
+.section{padding:80px 5%}.section-top{display:flex;justify-content:space-between;align-items:end;margin-bottom:30px}.section h2,.how h2{font:400 38px Georgia,serif;margin:0}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}.product-img{aspect-ratio:3/4;overflow:hidden;background:#eee}.product-img img{width:100%;height:100%;object-fit:cover;transition:.45s}.product{cursor:pointer}.product:hover .product-img img{transform:scale(1.025)}.product-meta{padding:14px 0}.product-name{font-size:13px}.price{font-size:12px;color:#555;margin-top:7px}.try{width:100%;margin-top:13px}.try:hover{background:#111;color:#fff}.heart{float:right;border:0;background:none;font-size:19px}
+.how{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:55px 5%;display:grid;grid-template-columns:1fr 2fr;gap:60px}.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:25px}.step-num{font-size:12px;color:var(--accent)}.step h3{font-size:11px;letter-spacing:.08em;margin:12px 0}.step p{font-size:11px;line-height:1.6;color:#777;margin:0}
+.overlay{display:none;position:fixed;inset:0;background:#1119;z-index:50;align-items:center;justify-content:center;padding:20px}.overlay.open{display:flex}.modal{background:var(--bg);width:min(920px,100%);max-height:92vh;overflow:auto;padding:38px}.modal-head{display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:22px;margin-bottom:28px}.modal h2{font:400 38px Georgia,serif;margin:8px 0 0}.close{border:0;background:none;font-size:25px}.try-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px}.photo-box{border:1px dashed #aaa;min-height:420px;display:flex;align-items:center;justify-content:center;text-align:center;padding:25px}.photo-box img{width:100%;height:420px;object-fit:cover;display:none}.photo-box.has-image img{display:block}.photo-box.has-image{padding:0;overflow:hidden}.photo-box.has-image .empty{display:none}.camera-row{display:flex;gap:8px;margin-top:15px}.camera-row button{flex:1}.color-match{border:1px solid var(--line);padding:18px;margin-bottom:26px;background:#fff}.color-match-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.color-match-title{font-size:11px;letter-spacing:.14em;text-transform:uppercase}.color-match-note{font-size:10px;color:#888}.color-swatches{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:15px}.color-swatch{width:32px;height:32px;border-radius:50%;border:1px solid #bbb;padding:0;position:relative;box-shadow:inset 0 0 0 2px #fff}.color-swatch.selected{outline:2px solid #111;outline-offset:2px}.color-swatch.light{border-color:#aaa}.color-swatch-label{position:absolute;left:50%;top:calc(100% + 7px);transform:translateX(-50%);font-size:8px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;opacity:0;pointer-events:none;background:#111;color:#fff;padding:4px 6px}.color-swatch:hover .color-swatch-label,.color-swatch:focus .color-swatch-label{opacity:1}.match-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.match-label{font-size:10px;color:#777;text-transform:uppercase;letter-spacing:.12em}.match-chips{display:flex;gap:7px;flex-wrap:wrap}.match-chip{border:1px solid #ccc;background:#fafafa;padding:7px 10px;font-size:10px;display:inline-flex;align-items:center;gap:6px}.match-chip:hover{border-color:#111;background:#fff}.mini-dot{width:12px;height:12px;border-radius:50%;display:inline-block;border:1px solid #aaa}.color-tip{font-size:10px;color:#777;margin-top:12px;line-height:1.5}.product-selected img{width:100%;aspect-ratio:3/4;object-fit:cover}.product-selected h3{font:400 25px Georgia,serif;margin:14px 0 6px}.product-selected p{color:#666;font-size:12px}.generate{width:100%;margin-top:20px}.note{font-size:10px;color:#888;line-height:1.5;margin-top:13px}.result{margin-top:28px;border-top:1px solid var(--line);padding-top:28px;display:none}.result.show{display:block}.generate.loading{opacity:.65;pointer-events:none}.generate.loading::after{content:"  • • •";letter-spacing:3px}.result img{width:100%;max-height:500px;object-fit:cover}.result .primary{margin-top:15px}
+footer{border-top:1px solid var(--line);padding:35px 5%;display:flex;justify-content:space-between;font-size:10px;color:#777}
+.toast{position:fixed;bottom:20px;left:50%;transform:translate(-50%,20px);background:#111;color:#fff;padding:13px 18px;font-size:11px;opacity:0;transition:.25s;z-index:80}.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:800px){.header{height:64px}.nav{display:none}.logo{font-size:25px}.hero{grid-template-columns:1fr;padding:45px 5%}.hero-image{height:480px;order:-1}.hero h1{font-size:66px}.grid{grid-template-columns:1fr 1fr;gap:16px}.how{grid-template-columns:1fr;gap:30px}.steps{grid-template-columns:1fr 1fr}.modal{padding:22px}.try-grid{grid-template-columns:1fr}.photo-box,.photo-box img{min-height:350px;height:350px}}
+@media(max-width:500px){.section{padding:55px 5%}.grid{grid-template-columns:1fr}.hero-actions{flex-direction:column}.hero-image{height:420px}.steps{grid-template-columns:1fr}.how{padding:45px 5%}footer{flex-direction:column;gap:15px}}
+
+.about-modal{position:fixed;inset:0;background:rgba(0,0,0,.48);display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;visibility:hidden;pointer-events:none;transition:.25s;z-index:120}
+.about-modal.open{opacity:1;visibility:visible;pointer-events:auto}
+.about-card{position:relative;background:#fff;max-width:560px;width:100%;padding:48px;box-shadow:0 24px 80px rgba(0,0,0,.22);transform:translateY(16px);transition:.25s}
+.about-modal.open .about-card{transform:translateY(0)}
+.about-card h2{font-size:48px;line-height:1;margin:10px 0 18px}
+.about-card>p{font-size:15px;line-height:1.7;max-width:470px}
+.about-points{margin:28px 0;border-top:1px solid #ddd}
+.about-points div{display:flex;gap:18px;padding:17px 0;border-bottom:1px solid #ddd;font-size:13px}
+.about-points strong{font-size:11px;letter-spacing:.12em}
+.about-points span{line-height:1.5}
+.modal-close{position:absolute;right:18px;top:14px;border:0;background:none;font-size:30px;cursor:pointer}
+@media(max-width:600px){.about-card{padding:34px 24px}.about-card h2{font-size:38px}}
+</style></head>
+<body>
+<header class="header"><a class="logo" href="#top" aria-label="VESTIRE home">VESTIRE</a><nav class="nav"><a href="#new">New In</a><a href="#new">Shop</a><button class="nav-link" type="button" onclick="openTryOn(selected)">Try On</button><button class="nav-link" type="button" onclick="openAbout()">About</button></nav><button class="bag" type="button" onclick="openBag()">Bag (<span id="bagCount">0</span>)</button></header>
+<main id="top">
+<section class="hero"><div><div class="kicker">Fashion, visualized</div><h1>See yourself<br>in <em>it.</em></h1><p>Discover pieces you love, then see how they could look on you before you buy. Upload a photo or take one with your camera.</p><div class="hero-actions"><button class="primary" onclick="openTryOn(0)">Try it on</button><a class="secondary" href="#new">Shop new arrivals</a></div></div><div class="hero-image"></div></section>
+<section class="section" id="new"><div class="section-top"><h2>New arrivals</h2><span class="small">03 pieces</span></div><div class="grid" id="productGrid"></div></section>
+<section class="how" id="try"><h2>Simple by design.</h2><div class="steps"><button class="step" type="button" onclick="document.getElementById('new').scrollIntoView({behavior:'smooth'})"><span class="step-num">01</span><h3>CHOOSE</h3><p>Pick a piece you want to see on yourself.</p></button><button class="step" type="button" onclick="openTryOn(selected)"><span class="step-num">02</span><h3>CAPTURE</h3><p>Take a photo with your camera or upload one.</p></button><button class="step" type="button" onclick="openTryOn(selected)"><span class="step-num">03</span><h3>TRY ON</h3><p>Generate your personalized virtual look.</p></button><button class="step" type="button" onclick="openBag()"><span class="step-num">04</span><h3>SHOP</h3><p>Love it? Add it to your bag.</p></button></div></section>
+</main><footer id="about"><button type="button" class="footer-link" onclick="window.scrollTo({top:0,behavior:'smooth'})">© 2026 VESTIRE</button><button type="button" class="footer-link" onclick="toast('Virtual fashion, made simple.')">Virtual fashion, made simple.</button></footer>
+
+<div class="about-modal" id="aboutOverlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="aboutTitle">
+  <div class="about-card">
+    <button class="modal-close" type="button" aria-label="Close About" onclick="closeAbout()">×</button>
+    <div class="kicker">ABOUT VESTIRE</div>
+    <h2 id="aboutTitle">Fashion, visualized.</h2>
+    <p>VESTIRE lets you explore clothing and preview how a piece could look on you before you buy.</p>
+    <div class="about-points">
+      <div><strong>01</strong><span>Choose a piece from the collection.</span></div>
+      <div><strong>02</strong><span>Upload a photo or take one with your camera.</span></div>
+      <div><strong>03</strong><span>Generate your personalized virtual look.</span></div>
+    </div>
+    <button class="primary" type="button" onclick="closeAbout();document.getElementById('new').scrollIntoView({behavior:'smooth'})">Explore VESTIRE</button>
+  </div>
+</div>
+
+<div class="overlay" id="overlay"><div class="modal"><div class="modal-head"><div><div class="kicker">Virtual try-on</div><h2>See it on you.</h2></div><button class="close" onclick="closeTryOn()">×</button></div>
+<div class="try-grid"><div><div class="small">Your photo</div><div class="photo-box" id="photoBox"><div class="empty"><div style="font-size:32px;margin-bottom:12px">＋</div><div>Take a photo or upload an existing one.</div><div class="note">For best results, use a clear full-body photo.</div></div><img id="photoPreview" alt="Your photo"></div><div class="camera-row"><button class="primary" onclick="takePhoto()">📷 Take photo</button><button class="secondary" onclick="fileInput.click()">↑ Upload</button></div><input id="fileInput" type="file" accept="image/*" hidden><input id="cameraInput" type="file" accept="image/*" capture="user" hidden></div>
+<div class="color-match" aria-label="Colour matching tool">
+  <div class="color-match-head"><span class="color-match-title">Colour match</span><span class="color-match-note">Find colours that pair well</span></div>
+  <div class="small" style="margin-bottom:10px">Choose your base colour</div>
+  <div class="color-swatches" id="colorSwatches"></div>
+  <div class="match-row"><span class="match-label">Pairs well with</span><div class="match-chips" id="matchChips"></div></div>
+  <div class="color-tip" id="colorTip">Select a colour to see styling suggestions.</div>
+</div>
+<div><div class="small">Selected piece</div><div class="product-selected"><img id="selectedImg" alt=""><h3 id="selectedName"></h3><p id="selectedPrice"></p></div><button class="primary generate" onclick="generate()">Generate look</button><div class="note">Phase 2 uses a server-side AI image-edit endpoint. Your API key stays on the server.</div></div></div>
+<div class="result" id="result"><div class="small">Your look</div><div id="resultStatus" class="note" style="margin:10px 0 15px;display:none"></div><img id="resultImg" alt="AI virtual try-on result"><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="primary" onclick="addBag()">Add to bag</button><button class="secondary" id="downloadBtn" onclick="downloadResult()">Download look</button></div></div></div></div>
+<div class="overlay" id="bagOverlay"><div class="modal bag-modal"><div class="modal-head"><div><div class="kicker">Your shopping bag</div><h2>Bag</h2></div><button class="close" onclick="closeBag()">×</button></div><div id="bagContent" class="bag-content"></div></div></div><div class="toast" id="toast"></div>
+<script>
+const products=[
+{name:"Silk Draped Dress",price:"$120",image:"https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=900&q=85",result:"https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=900&q=85"},
+{name:"Relaxed Linen Blazer",price:"$145",image:"https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&w=900&q=85",result:"https://images.unsplash.com/photo-1485968579580-b6d095142e6e?auto=format&fit=crop&w=900&q=85"},
+{name:"Soft Ribbed Top",price:"$68",image:"https://images.unsplash.com/photo-1614035030393-0d0e9d4e6d6a?auto=format&fit=crop&w=900&q=85",result:"https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=900&q=85"}
+];
+
+const colorPalettes={
+  Yellow:{hex:"#E8C547",pairs:[["White","#F8F7F2"],["Navy","#172B4D"],["Black","#111111"],["Brown","#795548"],["Lavender","#B7A3D4"]],tip:"Yellow works beautifully with clean neutrals, deep navy, warm brown, and soft lavender."},
+  Blue:{hex:"#4C78A8",pairs:[["White","#F8F7F2"],["Camel","#C19A6B"],["Navy","#172B4D"],["Terracotta","#C96A4A"],["Blush","#E8B7B7"]],tip:"Blue is easy to balance with white and camel, or make warmer with terracotta and blush."},
+  Red:{hex:"#B83A3A",pairs:[["White","#F8F7F2"],["Black","#111111"],["Cream","#EFE4CF"],["Navy","#172B4D"],["Blush","#E8B7B7"]],tip:"Red makes a strong statement. Keep the second colour calm for a polished look."},
+  Green:{hex:"#607D5A",pairs:[["Cream","#EFE4CF"],["White","#F8F7F2"],["Tan","#C8A97E"],["Burgundy","#6E2430"],["Black","#111111"]],tip:"Earthy greens pair naturally with cream, tan and burgundy."},
+  Pink:{hex:"#D889A6",pairs:[["White","#F8F7F2"],["Grey","#A7A7A7"],["Burgundy","#6E2430"],["Navy","#172B4D"],["Chocolate","#5A3A2E"]],tip:"Soft pink looks refined with neutrals and gains contrast with navy or burgundy."},
+  Black:{hex:"#111111",pairs:[["White","#F8F7F2"],["Camel","#C19A6B"],["Red","#B83A3A"],["Grey","#A7A7A7"],["Sage","#9CAF88"]],tip:"Black is a versatile base: add a light neutral for contrast or a rich accent for impact."},
+  White:{hex:"#F8F7F2",pairs:[["Black","#111111"],["Navy","#172B4D"],["Tan","#C8A97E"],["Sage","#9CAF88"],["Red","#B83A3A"]],tip:"White gives you a clean canvas, so both neutrals and strong accent colours work."},
+  Purple:{hex:"#8064A2",pairs:[["Cream","#EFE4CF"],["White","#F8F7F2"],["Grey","#A7A7A7"],["Sage","#9CAF88"],["Navy","#172B4D"]],tip:"Purple looks elegant with cream and grey, while sage adds a softer fashion-forward contrast."}
+};
+let baseColor="Yellow";
+
+const grid=document.getElementById("productGrid");
+const overlay=document.getElementById("overlay");
+const selectedImg=document.getElementById("selectedImg");
+const selectedName=document.getElementById("selectedName");
+const selectedPrice=document.getElementById("selectedPrice");
+const result=document.getElementById("result");
+const resultImg=document.getElementById("resultImg");
+const photoBox=document.getElementById("photoBox");
+const photoPreview=document.getElementById("photoPreview");
+const fileInput=document.getElementById("fileInput");
+const cameraInput=document.getElementById("cameraInput");
+const bagCount=document.getElementById("bagCount");
+const toastEl=document.getElementById("toast");
+
+let selected=0, photoUrl=null, bag=0, bagItems=[];
+
+function renderColorMatcher(){
+  const swatches=document.getElementById("colorSwatches");
+  const chips=document.getElementById("matchChips");
+  const tip=document.getElementById("colorTip");
+  if(!swatches||!chips||!tip) return;
+  swatches.innerHTML=Object.entries(colorPalettes).map(([name,data])=>`<button class="color-swatch ${name===baseColor?"selected":""} ${name==="White"?"light":""}" type="button" aria-label="${name}" title="${name}" onclick="selectBaseColor('${name}')" style="background:${data.hex}"><span class="color-swatch-label">${name}</span></button>`).join("");
+  const pairs=colorPalettes[baseColor].pairs;
+  chips.innerHTML=pairs.map(([name,hex])=>`<button class="match-chip" type="button" onclick="choosePair('${name}')"><span class="mini-dot" style="background:${hex}"></span>${name}</button>`).join("");
+  tip.textContent=colorPalettes[baseColor].tip;
+}
+function selectBaseColor(name){
+  baseColor=name;
+  renderColorMatcher();
+  toast(`${name} selected — see recommended pairings.`);
+}
+function choosePair(name){
+  toast(`${baseColor} + ${name} is a great combination.`);
+}
+renderColorMatcher();
+
+products.forEach((p,i)=>{
+  grid.insertAdjacentHTML("beforeend",
+    `<article class="product" onclick="openTryOn(${i})">
+      <div class="product-img"><img src="${p.image}" alt="${p.name}"></div>
+      <div class="product-meta">
+        <button class="heart" onclick="event.stopPropagation();heart(this)" aria-label="Wishlist">♡</button>
+        <div class="product-name">${p.name}</div>
+        <div class="price">${p.price}</div>
+        <button class="try" onclick="event.stopPropagation();openTryOn(${i})">✦ Try on</button>
+      </div>
+    </article>`
+  );
+});
+
+function openTryOn(i){
+  selected=i;
+  selectedImg.src=products[i].image;
+  selectedName.textContent=products[i].name;
+  selectedPrice.textContent=products[i].price;
+  result.classList.remove("show");
+  overlay.classList.add("open");
+}
+
+function closeTryOn(){
+  overlay.classList.remove("open");
+}
+
+function takePhoto(){
+  cameraInput.click();
+}
+
+function handleFile(file){
+  if(!file) return;
+
+  if(!file.type || !file.type.startsWith("image/")){
+    toast("Please select a JPG, PNG, or WEBP image.");
+    return;
+  }
+
+  if(file.size > 10 * 1024 * 1024){
+    toast("Please choose an image smaller than 10 MB.");
+    return;
+  }
+
+  // Revoke the previous temporary URL to avoid memory leaks.
+  if(photoUrl) URL.revokeObjectURL(photoUrl);
+
+  photoUrl=URL.createObjectURL(file);
+
+  // Force the browser to load the new local image before showing it.
+  photoPreview.onload=()=>{
+    photoBox.classList.add("has-image");
+    toast("Photo uploaded — preview is ready.");
+  };
+  photoPreview.onerror=()=>{
+    photoBox.classList.remove("has-image");
+    toast("We couldn't preview that image. Please try another photo.");
+  };
+  photoPreview.src=photoUrl;
+
+  // Reset file inputs so selecting the same photo again fires change.
+  fileInput.value="";
+  cameraInput.value="";
+}
+
+fileInput.addEventListener("change",e=>handleFile(e.target.files[0]));
+cameraInput.addEventListener("change",e=>handleFile(e.target.files[0]));
+
+async function generate(){
+  if(!photoUrl){
+    toast("Take a photo or upload one first.");
+    return;
+  }
+
+  const generateButton=document.querySelector(".generate");
+  const resultStatus=document.getElementById("resultStatus");
+  generateButton.classList.add("loading");
+  generateButton.textContent="Generating AI look";
+  result.classList.remove("show");
+  resultStatus.style.display="block";
+  resultStatus.textContent="AI is combining your photo with the selected piece. This can take a little while.";
+  toast("Generating your virtual look…");
+
+  try{
+    const response=await fetch(photoUrl);
+    const photoBlob=await response.blob();
+    const base64=await blobToDataUrl(photoBlob);
+
+    const apiResponse=await fetch("/api/try-on",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        personImage:base64,
+        productImage:products[selected].image,
+        productName:products[selected].name
+      })
+    });
+
+    const data=await apiResponse.json();
+    if(!apiResponse.ok) throw new Error(data.error || "AI generation failed.");
+
+    resultImg.src=data.image;
+    resultImg.alt="AI virtual try-on result";
+    resultStatus.textContent="AI-generated virtual try-on result.";
+    result.classList.add("show");
+    toast("Your AI look is ready.");
+  }catch(error){
+    result.classList.add("show");
+    resultStatus.textContent=error.message || "Something went wrong while generating the look.";
+    resultImg.removeAttribute("src");
+    toast("Generation failed. Check the server/API setup.");
+  }finally{
+    generateButton.classList.remove("loading");
+    generateButton.textContent="Generate look";
+  }
+}
+
+function blobToDataUrl(blob){
+  return new Promise((resolve,reject)=>{
+    const reader=new FileReader();
+    reader.onload=()=>resolve(reader.result);
+    reader.onerror=reject;
+    reader.readAsDataURL(blob);
+  });
+}
+
+function downloadResult(){
+  if(!resultImg.src) return;
+  const link=document.createElement("a");
+  link.href=resultImg.src;
+  link.download="vestire-virtual-look.png";
+  link.click();
+}
+
+function addBag(){
+  bag++;
+  bagItems.push(selected);
+  bagCount.textContent=bag;
+  toast(products[selected].name + " added to bag.");
+  openBag();
+}
+
+function openBag(){
+  const overlay=document.getElementById("bagOverlay");
+  const content=document.getElementById("bagContent");
+  if(!bagItems.length){
+    content.innerHTML="<div class=\"bag-empty\">Your bag is empty.<br><br><button class=\"primary\" onclick=\"closeBag();document.getElementById(\'new\').scrollIntoView({behavior:\'smooth\'})\">Shop new arrivals</button></div>";
+  }else{
+    content.innerHTML=bagItems.map(i=>`<div class="bag-item"><img src="${products[i].image}" alt="${products[i].name}"><div><strong>${products[i].name}</strong><div class="price">${products[i].price}</div></div></div>`).join("")+`<button class="primary" style="margin-top:18px" onclick="toast('Checkout is ready for Phase 3.')">Checkout</button>`;
+  }
+  overlay.classList.add("open");
+}
+function closeBag(){document.getElementById("bagOverlay").classList.remove("open");}
+document.getElementById("bagOverlay").addEventListener("click",e=>{if(e.target.id==="bagOverlay")closeBag();});
+
+function heart(button){
+  button.textContent=button.textContent==="♡"?"♥":"♡";
+  toast(button.textContent==="♥"?"Saved to wishlist.":"Removed from wishlist.");
+}
+
+function toast(message){
+  toastEl.textContent=message;
+  toastEl.classList.add("show");
+  clearTimeout(window.vestireToast);
+  window.vestireToast=setTimeout(()=>toastEl.classList.remove("show"),2200);
+}
+
+overlay.addEventListener("click",e=>{
+  if(e.target===overlay) closeTryOn();
+});
+
+function openAbout(){
+  const about=document.getElementById("aboutOverlay");
+  about.classList.add("open");
+  about.setAttribute("aria-hidden","false");
+}
+function closeAbout(){
+  const about=document.getElementById("aboutOverlay");
+  about.classList.remove("open");
+  about.setAttribute("aria-hidden","true");
+}
+document.getElementById("aboutOverlay").addEventListener("click",e=>{
+  if(e.target.id==="aboutOverlay") closeAbout();
+});
+document.addEventListener("keydown",e=>{if(e.key==="Escape") closeAbout();});
+
+</script></body></html>
